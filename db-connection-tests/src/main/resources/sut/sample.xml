@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sut validators="">
+	<db>
+		<class>il.co.topq.jsystem.DataBase</class>
+		<type>MySql</type>
+		<host>127.0.0.1</host>
+		<user>root</user>
+		<port>3306</port>
+		<password>root</password>
+		<schema>jsystem</schema>
+	</db>
+</sut>
