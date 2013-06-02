@@ -28,6 +28,8 @@ public class DataBase extends SystemObjectImpl {
 	
 	private DbType type;
 	
+	private boolean connectOnInit = true;
+	
 	private String user = "";
 	
 	private String password = "";
@@ -42,11 +44,18 @@ public class DataBase extends SystemObjectImpl {
 	
 	private String resultSetString;
 	
-	private Connection conn;
+	protected Connection conn;
 	
+	@Override
 	public void init() throws Exception {
 		super.init();
-
+		if(isConnectOnInit()){
+			connect();
+		}
+	}
+	
+	public void connect() throws Exception{
+		
 		DriverManager.setLoginTimeout(60);
 		String connectionStr = null;
 		
@@ -220,6 +229,14 @@ public class DataBase extends SystemObjectImpl {
 		setTestAgainstObject(rowCount);
 		stmt.close();
 		return resultSetString.toString().trim();
+	}
+	
+	public ResultSet getQueryResultSet(String query) throws SQLException {
+		report("Excecuting query : " + query);
+		Statement stmt = conn.createStatement();
+		ResultSet rset = stmt.executeQuery(query.toString());
+		stmt.close();
+		return rset;
 	}
 	
 	public String select(String tableName) throws Exception {
@@ -408,6 +425,20 @@ public class DataBase extends SystemObjectImpl {
 	
 	public String getResultSetString() {
 		return resultSetString;
+	}
+
+	/**
+	 * @return the connectOnInit
+	 */
+	public boolean isConnectOnInit() {
+		return connectOnInit;
+	}
+
+	/**
+	 * @param connectOnInit the connectOnInit to set
+	 */
+	public void setConnectOnInit(boolean connectOnInit) {
+		this.connectOnInit = connectOnInit;
 	}
 	
 }
