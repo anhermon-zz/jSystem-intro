@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><sut validators="">
+	<db>
+		<class>il.co.topq.jsystem.DataBase</class>
+		<type>Sqlite</type>
+		<schema>/home/itai/mydb.db</schema>
+	</db>
+</sut>

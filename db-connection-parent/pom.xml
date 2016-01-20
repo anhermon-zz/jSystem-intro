@@ -3,11 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jsystemtest.systemobjects</groupId>
 	<artifactId>db-connection-parent</artifactId>
-	<version>1.0.00</version>
+	<version>1.0.01-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
 		<topq.repository.rootUrl>http://maven.top-q.co.il</topq.repository.rootUrl>
+		<jsystem.version>6.1.02</jsystem.version>
 	</properties>
 	<build>
 		<plugins>
@@ -16,8 +17,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.5.1</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -42,22 +43,22 @@
 			<dependency>
 				<groupId>org.jsystemtest</groupId>
 				<artifactId>jsystemCommon</artifactId>
-				<version>6.0.01</version>
+				<version>${jsystem.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jsystemtest.systemobjects</groupId>
 				<artifactId>cli</artifactId>
-				<version>6.0.01</version>
+				<version>${jsystem.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jsystemtest</groupId>
 				<artifactId>jsystemApp</artifactId>
-				<version>6.0.01</version>
+				<version>${jsystem.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jsystemtest</groupId>
 				<artifactId>jsystemCore</artifactId>
-				<version>6.0.01</version>
+				<version>${jsystem.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

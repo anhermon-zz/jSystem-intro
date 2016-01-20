@@ -19,64 +19,69 @@ import jsystem.framework.system.SystemObjectImpl;
  * @author itai
  */
 public class DataBase extends SystemObjectImpl {
-	
+
 	public static enum DbType {
-		MySql, Oracle, SyBase, MsSql
+		MySql, Oracle, SyBase, MsSql, Sqlite
 	}
-	
+
 	private static final String EOL = System.getProperty("line.separator");
-	
+
 	private DbType type;
-	
+
 	private boolean connectOnInit = true;
-	
+
 	private String user = "";
-	
+
 	private String password = "";
-	
+
 	private String host;
-	
+
 	private String port;
-	
+
 	private String sid;
-	
+
 	private String schema;
-	
+
 	private String resultSetString;
-	
+
 	protected Connection conn;
-	
+
 	@Override
 	public void init() throws Exception {
 		super.init();
-		if(isConnectOnInit()){
+		if (isConnectOnInit()) {
 			connect();
 		}
 	}
-	
-	public void connect() throws Exception{
-		
+
+	public void connect() throws Exception {
+
 		DriverManager.setLoginTimeout(60);
 		String connectionStr = null;
-		
+
 		switch (type) {
-			case Oracle:
-				DriverManager.registerDriver( (Driver) Class.forName("oracle.jdbc.driver.OracleDriver").newInstance());
-				connectionStr = String.format("jdbc:oracle:thin:@%s:%s:%s", host, port, sid);
-				break;
-			case MySql:
-				DriverManager.registerDriver( (Driver) Class.forName("com.mysql.jdbc.Driver").newInstance());
-//				jdbc:mysql://192.168.150.89:3306/
-				connectionStr = new String("jdbc:mysql://"+host+":"+port+"/" + schema);
-				break;
-			case SyBase:
-				DriverManager.registerDriver( (Driver) Class.forName("com.sybase.jdbc3.jdbc.SybDriver").newInstance());
-				connectionStr = "jdbc:sybase:Tds:" + getHost() + ":" + getPort();
-				break;
-			case MsSql:
-				DriverManager.registerDriver( (Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance());
-				connectionStr = String.format("jdbc:sqlserver://%s:%s;database=%s;user=%s;password=%s", getHost(), getPort(), getSchema(), getUser(), getPassword());
-				break;
+		case Oracle:
+			DriverManager.registerDriver((Driver) Class.forName("oracle.jdbc.driver.OracleDriver").newInstance());
+			connectionStr = String.format("jdbc:oracle:thin:@%s:%s:%s", host, port, sid);
+			break;
+		case MySql:
+			DriverManager.registerDriver((Driver) Class.forName("com.mysql.jdbc.Driver").newInstance());
+			connectionStr = new String("jdbc:mysql://" + host + ":" + port + "/" + schema);
+			break;
+		case SyBase:
+			DriverManager.registerDriver((Driver) Class.forName("com.sybase.jdbc3.jdbc.SybDriver").newInstance());
+			connectionStr = "jdbc:sybase:Tds:" + getHost() + ":" + getPort();
+			break;
+		case MsSql:
+			DriverManager.registerDriver(
+					(Driver) Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance());
+			connectionStr = String.format("jdbc:sqlserver://%s:%s;database=%s;user=%s;password=%s", getHost(),
+					getPort(), getSchema(), getUser(), getPassword());
+			break;
+		case Sqlite:
+			DriverManager.registerDriver((Driver) Class.forName("org.sqlite.JDBC").newInstance());
+			connectionStr = String.format("jdbc:sqlite:%s", getSchema());
+			break;
 		}
 		// Attempt to connect to a driver.
 		report(connectionStr);
@@ -87,10 +92,10 @@ public class DataBase extends SystemObjectImpl {
 			throw new Exception("Failed to connect to SQL Server");
 		}
 	}
-	
+
 	public void close() {
 		try {
-			if (conn != null){
+			if (conn != null) {
 				conn.close();
 			}
 		} catch (SQLException e) {
@@ -98,7 +103,7 @@ public class DataBase extends SystemObjectImpl {
 		}
 		super.close();
 	}
-	
+
 	/**
 	 * open SQL query
 	 * 
@@ -115,15 +120,15 @@ public class DataBase extends SystemObjectImpl {
 			return executeUpdateStatement(query);
 		}
 	}
-	
+
 	/**
 	 * INSERT INTO ${tableName} (${columns}) VALUES (${values})
 	 * 
 	 * @param tableName
 	 * @param columns
-	 *        column1;column2
+	 *            column1;column2
 	 * @param values
-	 *        value1;value2
+	 *            value1;value2
 	 * @return Number of affected Rows
 	 * @throws Exception
 	 */
@@ -134,29 +139,33 @@ public class DataBase extends SystemObjectImpl {
 		if (columns == null || columns.isEmpty()) {
 			query = String.format("INSERT INTO %s VALUES (%s)", tableName, replaceDelimiters(values));
 		} else {
-			query = String.format("INSERT INTO %s (%s) VALUES (%s)", tableName, replaceDelimiters(columns), replaceDelimiters(values));
+			query = String.format("INSERT INTO %s (%s) VALUES (%s)", tableName, replaceDelimiters(columns),
+					replaceDelimiters(values));
 		}
 		return executeUpdateStatementAndReport(tableName, query);
 	}
-	
+
 	public int insert(String tableName, String values) throws Exception {
 		return insert(tableName, null, values);
 	}
-	
+
 	/**
-	 * UPDATE ${tableName} SET ${setColumnsAndValues} WHERE ${whereColumnsAndValues} with ${and} logic between ${whereColumnsAndValues}
+	 * UPDATE ${tableName} SET ${setColumnsAndValues} WHERE
+	 * ${whereColumnsAndValues} with ${and} logic between
+	 * ${whereColumnsAndValues}
 	 * 
 	 * @param tableName
 	 * @param whereColumnsAndValues
-	 *        column1='value1';colume2='value2'
+	 *            column1='value1';colume2='value2'
 	 * @param setColumnsAndValues
-	 *        column1='value1';colume2='value2'
+	 *            column1='value1';colume2='value2'
 	 * @param and
-	 *        logic between ${whereColumnsAndValues}
+	 *            logic between ${whereColumnsAndValues}
 	 * @return Number of rows affected
 	 * @throws Exception
 	 */
-	public int update(String tableName, String whereColumnsAndValues, String setColumnsAndValues, boolean and) throws Exception {
+	public int update(String tableName, String whereColumnsAndValues, String setColumnsAndValues, boolean and)
+			throws Exception {
 		assertNotEmpty(tableName);
 		assertNotEmpty(whereColumnsAndValues);
 		assertNotEmpty(setColumnsAndValues);
@@ -164,49 +173,54 @@ public class DataBase extends SystemObjectImpl {
 				formatWhereColumnsAndValue(whereColumnsAndValues, and));
 		return executeUpdateStatementAndReport(tableName, query);
 	}
-	
+
 	public int update(String tableName, String whereColumnsAndValues, String setColumnsAndValues) throws Exception {
 		return update(tableName, whereColumnsAndValues, setColumnsAndValues, true);
 	}
-	
+
 	/**
-	 * DELETE FROM ${tableName} WHERE ${whereColumnsAndValues} with ${and} logic between ${whereColumnsAndValues}
+	 * DELETE FROM ${tableName} WHERE ${whereColumnsAndValues} with ${and} logic
+	 * between ${whereColumnsAndValues}
 	 * 
 	 * @param tableName
 	 * @param whereColumnsAndValues
-	 *        column1='value1';colume2='value2'
+	 *            column1='value1';colume2='value2'
 	 * @param and
-	 *        logic between ${whereColumnsAndValues}
+	 *            logic between ${whereColumnsAndValues}
 	 * @return Number of rows affected
 	 * @throws Exception
 	 */
 	public int delete(String tableName, String whereColumnsAndValues, boolean and) throws Exception {
 		assertNotEmpty(tableName);
 		assertNotEmpty(whereColumnsAndValues);
-		String query = new String("DELETE FROM " + tableName + " " + formatWhereColumnsAndValue(whereColumnsAndValues, and));
+		String query = new String(
+				"DELETE FROM " + tableName + " " + formatWhereColumnsAndValue(whereColumnsAndValues, and));
 		return executeUpdateStatementAndReport(tableName, query);
 	}
-	
+
 	public int delete(String tableName, String whereColumnsAndValues) throws Exception {
 		return delete(tableName, whereColumnsAndValues, true);
 	}
-	
+
 	/**
-	 * SELECT ${distinct} ${columns} FROM ${tablesNames} WHERE ${whereColumnsAndValues} with ${and} logic between ${whereColumnsAndValues}
+	 * SELECT ${distinct} ${columns} FROM ${tablesNames} WHERE
+	 * ${whereColumnsAndValues} with ${and} logic between
+	 * ${whereColumnsAndValues}
 	 * 
 	 * @param tablesNames
-	 *        one or more tables.
+	 *            one or more tables.
 	 * @param columns
-	 *        Columns to include in ResultSet
+	 *            Columns to include in ResultSet
 	 * @param whereColumnsAndValues
-	 *        column1='value1';colume2='value2'
+	 *            column1='value1';colume2='value2'
 	 * @param and
-	 *        logic between ${whereColumnsAndValues}
+	 *            logic between ${whereColumnsAndValues}
 	 * @param distinct
 	 * @return Result set
 	 * @throws Exception
 	 */
-	public String select(String tablesNames, String columns, String whereColumnsAndValues, boolean and, boolean distinct) throws Exception {
+	public String select(String tablesNames, String columns, String whereColumnsAndValues, boolean and,
+			boolean distinct) throws Exception {
 		assertNotEmpty(tablesNames);
 		StringBuffer query = new StringBuffer("SELECT ");
 		if (distinct) {
@@ -217,10 +231,11 @@ public class DataBase extends SystemObjectImpl {
 		} else {
 			query.append("* ");
 		}
-		query.append("FROM " + replaceDelimiters(tablesNames) + " " + formatWhereColumnsAndValue(whereColumnsAndValues, and));
+		query.append("FROM " + replaceDelimiters(tablesNames) + " "
+				+ formatWhereColumnsAndValue(whereColumnsAndValues, and));
 		return executeSelectStatement(query.toString());
 	}
-	
+
 	public String executeSelectStatement(String query) throws SQLException {
 		report("Excecuting query : " + query);
 		Statement stmt = conn.createStatement();
@@ -230,7 +245,7 @@ public class DataBase extends SystemObjectImpl {
 		stmt.close();
 		return resultSetString.toString().trim();
 	}
-	
+
 	public ResultSet getQueryResultSet(String query) throws SQLException {
 		report("Excecuting query : " + query);
 		Statement stmt = conn.createStatement();
@@ -238,30 +253,33 @@ public class DataBase extends SystemObjectImpl {
 		stmt.close();
 		return rset;
 	}
-	
+
 	public String select(String tableName) throws Exception {
 		return select(tableName, "");
 	}
-	
+
 	public String select(String tablesNames, String whereColumnsAndValues) throws Exception {
 		return select(tablesNames, "* ", whereColumnsAndValues, true, false);
 	}
-	
+
 	public String select(String tablesNames, String whereColumnsAndValues, boolean and) throws Exception {
 		return select(tablesNames, "* ", whereColumnsAndValues, and, false);
 	}
-	
-	public String select(String tablesNames, String whereColumnsAndValues, boolean and, boolean distinct) throws Exception {
+
+	public String select(String tablesNames, String whereColumnsAndValues, boolean and, boolean distinct)
+			throws Exception {
 		return select(tablesNames, "* ", whereColumnsAndValues, and, distinct);
 	}
-	
+
 	/**
-	 * run execute update. This method is used for every query from that changes the data base. It also reports the table before the change
-	 * and after the change.
+	 * run execute update. This method is used for every query from that changes
+	 * the data base. It also reports the table before the change and after the
+	 * change.
 	 * 
 	 * @param tableName
 	 * @param query
-	 * @return Number of rows affected. Also, sets the result as test against object.
+	 * @return Number of rows affected. Also, sets the result as test against
+	 *         object.
 	 * @throws SQLException
 	 * @throws Exception
 	 */
@@ -272,7 +290,7 @@ public class DataBase extends SystemObjectImpl {
 		setTestAgainstObject(result);
 		return result;
 	}
-	
+
 	private int executeUpdateStatement(String query) throws SQLException {
 		report.report("Excecuting update : " + query);
 		Statement stmt = conn.createStatement();
@@ -281,7 +299,7 @@ public class DataBase extends SystemObjectImpl {
 		setTestAgainstObject(result);
 		return result;
 	}
-	
+
 	/**
 	 * Reports the resultSet as HTML table<br>
 	 * It also fills the resultSetString.
@@ -331,7 +349,7 @@ public class DataBase extends SystemObjectImpl {
 		report.reportHtml("ResultSet", sb.toString(), true);
 		return rowCount;
 	}
-	
+
 	private String formatWhereColumnsAndValue(String whereColumnsAndValues, boolean and) {
 		if (whereColumnsAndValues == null || whereColumnsAndValues.isEmpty()) {
 			return " ";
@@ -348,57 +366,57 @@ public class DataBase extends SystemObjectImpl {
 		}
 		return sb.toString();
 	}
-	
+
 	private void assertNotEmpty(String str) throws Exception {
 		if (str == null || str.isEmpty()) {
 			throw new Exception("Variable " + str + " is null or empty");
 		}
 	}
-	
+
 	/**
-	 * Replaces all delimiters ";" with delimiters ",". the exception is delimiter with "\" prefix. in this case, only the prefix will be
-	 * deleted.
+	 * Replaces all delimiters ";" with delimiters ",". the exception is
+	 * delimiter with "\" prefix. in this case, only the prefix will be deleted.
 	 * 
 	 * @param str
 	 * @return String with replaced delimiters
 	 */
 	private String replaceDelimiters(String str) {
 		return str.replaceAll("(?<!\\\\);", ",").replaceAll("\\\\;", ";");
-		
+
 	}
-	
+
 	public String getUser() {
 		return user;
 	}
-	
+
 	public void setUser(String user) {
 		this.user = user;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
-	
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public String getHost() {
 		return host;
 	}
-	
+
 	public void setHost(String host) {
 		this.host = host;
 	}
-	
+
 	public String getPort() {
 		return port;
 	}
-	
+
 	public void setPort(String port) {
 		this.port = port;
 	}
-	
+
 	public DbType getType() {
 		return type;
 	}
@@ -410,19 +428,19 @@ public class DataBase extends SystemObjectImpl {
 	public String getSid() {
 		return sid;
 	}
-	
+
 	public void setSid(String sid) {
 		this.sid = sid;
 	}
-	
+
 	public String getSchema() {
 		return schema;
 	}
-	
+
 	public void setSchema(String schema) {
 		this.schema = schema;
 	}
-	
+
 	public String getResultSetString() {
 		return resultSetString;
 	}
@@ -435,10 +453,11 @@ public class DataBase extends SystemObjectImpl {
 	}
 
 	/**
-	 * @param connectOnInit the connectOnInit to set
+	 * @param connectOnInit
+	 *            the connectOnInit to set
 	 */
 	public void setConnectOnInit(boolean connectOnInit) {
 		this.connectOnInit = connectOnInit;
 	}
-	
+
 }

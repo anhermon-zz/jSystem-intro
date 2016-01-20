@@ -2,12 +2,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>db-connection-tests</artifactId>
-	<version>1.0.0</version>
 	<dependencies>
 		<dependency>
 			<groupId>org.jsystemtest.systemobjects</groupId>
 			<artifactId>db-connection-so</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1-SNAPSHOT</version>
 		</dependency>
 			<dependency>
 				<groupId>org.jsystemtest</groupId>
@@ -68,7 +67,7 @@
 	<parent>
 		<groupId>org.jsystemtest.systemobjects</groupId>
 		<artifactId>db-connection-parent</artifactId>
-		<version>1.0.00</version>
+		<version>1.0.01-SNAPSHOT</version>
 		<relativePath>../db-connection-parent</relativePath>
 	</parent>
 </project>
