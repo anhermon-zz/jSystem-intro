@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><sut validators="">
+    <lab>
+        <class>com.jethrodata.auto.Lab</class>
+        <station>
+            <class>com.jethrodata.auto.LinuxStation</class>
+            <userName>itai</userName>
+            <cliConnection>
+                <class>com.jethrodata.auto.UbuntuCliConnection</class>
+                <password>topq1!</password>
+                <host>127.0.0.1</host>
+                <user>itai</user>
+            </cliConnection>
+        </station>
+    </lab>
+</sut>

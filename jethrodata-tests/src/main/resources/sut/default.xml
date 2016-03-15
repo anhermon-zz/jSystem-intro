@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><sut validators="">
+    <db>
+        <class>il.co.topq.jsystem.DataBase</class>
+        <schema>jsystem_test</schema>
+        <port>3306</port>
+        <host>localhost</host>
+        <type>MySql</type>
+        <user>root</user>
+        <sid/>
+    </db>
+    <dsHandler>
+        <class>il.co.topq.jsystem.DatasourceToFileOutputHandler</class>
+        <destination>C:/workspace/test.txt</destination>
+    </dsHandler>
+</sut>
