@@ -45,6 +45,9 @@ public class DataBase extends SystemObjectImpl {
 	private String resultSetString;
 
 	protected Connection conn;
+	
+	private DatasourceOutputHandler handler;
+	
 
 	@Override
 	public void init() throws Exception {
@@ -244,6 +247,19 @@ public class DataBase extends SystemObjectImpl {
 		setTestAgainstObject(rowCount);
 		stmt.close();
 		return resultSetString.toString().trim();
+	}
+	
+	public void executeSelectStatementWithHandler(String query, DatasourceOutputHandler handler) throws SQLException {
+		if(handler == null) {
+			throw new RuntimeException("No DatasourceOutputHandler defined!");
+		}
+		report("Excecuting query : " + query + " with handler:" + handler.getClass().getSimpleName());
+		try(Statement stmt = conn.createStatement()){
+			try(ResultSet rset = stmt.executeQuery(query.toString())) {
+				handler.handle(rset);
+			}
+		}
+		
 	}
 
 	public ResultSet getQueryResultSet(String query) throws SQLException {
@@ -458,6 +474,14 @@ public class DataBase extends SystemObjectImpl {
 	 */
 	public void setConnectOnInit(boolean connectOnInit) {
 		this.connectOnInit = connectOnInit;
+	}
+
+	public DatasourceOutputHandler getHandler() {
+		return handler;
+	}
+
+	public void setHandler(DatasourceOutputHandler handler) {
+		this.handler = handler;
 	}
 
 }

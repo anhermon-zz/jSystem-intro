@@ -9,6 +9,7 @@
 	<properties>
 		<topq.repository.rootUrl>http://maven.top-q.co.il</topq.repository.rootUrl>
 		<jsystem.version>6.1.02</jsystem.version>
+		<mysql.version>5.1.38</mysql.version>
 	</properties>
 	<build>
 		<plugins>
@@ -17,8 +18,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.5.1</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 			<plugin>
