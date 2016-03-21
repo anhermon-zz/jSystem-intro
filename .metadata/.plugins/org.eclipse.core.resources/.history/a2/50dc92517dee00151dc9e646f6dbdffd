@@ -1,0 +1,33 @@
+package com.jethrodata.auto;
+
+import java.io.File;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import jsystem.framework.TestProperties;
+import junit.framework.SystemTestCase4;
+
+public class LogOperations extends SystemTestCase4 {
+	private AbstractLogCollector logCollector;
+	private File source;
+	@Before
+	public void setup() throws Exception {
+		logCollector = (AbstractLogCollector) system.getSystemObject("logCollector");
+	}
+	
+	@Test
+	@TestProperties(name = "Collect logs from ${source}", paramsInclude = { "source" })
+	public void testLogCollection() {
+		logCollector.collect(source, 0, 999999999);
+	}
+
+	public File getSource() {
+		return source;
+	}
+
+	public void setSource(File source) {
+		this.source = source;
+	}
+
+}

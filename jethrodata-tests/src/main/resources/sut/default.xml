@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?><sut validators="">
-    <db>
-        <class>il.co.topq.jsystem.DataBase</class>
-        <schema>jsystem_test</schema>
-        <port>3306</port>
-        <host>localhost</host>
-        <type>MySql</type>
-        <user>root</user>
-        <sid/>
-    </db>
-    <dsHandler>
-        <class>il.co.topq.jsystem.DatasourceToFileOutputHandler</class>
-        <destination>C:/workspace/test.txt</destination>
-    </dsHandler>
+    <lab>
+        <class>com.jethrodata.auto.Lab</class>
+        <jethroServer>
+            <class>com.jethrodata.auto.JethroServer</class>
+            <cli>
+                <class>com.jethrodata.auto.cli.HadoopStation</class>
+                <cliConnection>
+                    <class>com.jethrodata.auto.cli.UbuntuCliConnection</class>
+                    <privateKey>C:/workspace/jSystem-intro/jethrodata-tests/src/main/resources/jethrotest-oregon.pem</privateKey>
+                    <protocol>ssh-rsa</protocol>
+                    <host>54.188.248.152</host>
+                    <user>ec2-user</user>
+                </cliConnection>
+            </cli>
+        </jethroServer>
+    </lab>
 </sut>

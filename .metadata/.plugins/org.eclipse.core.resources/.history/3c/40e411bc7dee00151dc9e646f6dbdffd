@@ -1,0 +1,11 @@
+package com.jethrodata.auto.logs;
+
+import java.io.File;
+
+import jsystem.framework.system.SystemObjectImpl;
+
+public abstract class AbstractLogCollector extends SystemObjectImpl {
+
+	public abstract String collect(File source, long startTS, long endTS);
+
+}

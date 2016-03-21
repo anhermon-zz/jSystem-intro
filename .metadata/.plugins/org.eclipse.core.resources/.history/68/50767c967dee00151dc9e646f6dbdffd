@@ -1,0 +1,5 @@
+package com.jethrodata.auto.logs;
+
+public class FileLogCollector {
+
+}

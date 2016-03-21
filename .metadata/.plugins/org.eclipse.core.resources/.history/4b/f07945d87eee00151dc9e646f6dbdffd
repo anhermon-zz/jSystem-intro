@@ -1,0 +1,7 @@
+package com.jethrodata.auto.util;
+
+import jsystem.framework.system.SystemObjectImpl;
+
+public class CommonsContainer extends SystemObjectImpl {
+
+}

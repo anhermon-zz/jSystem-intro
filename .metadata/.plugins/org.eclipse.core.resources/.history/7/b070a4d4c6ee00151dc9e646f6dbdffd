@@ -1,0 +1,42 @@
+package com.jethrodata.auto;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import junit.framework.SystemTestCase4;
+
+/**
+ * This block is responsible for the setup of the jethro server
+ * @author Angel Hermon
+ */
+public class JethroSetup extends SystemTestCase4 {
+	
+	private Lab lab;
+	
+	@Before
+	public void setup() throws Exception {
+		lab = (Lab) system.getSystemObject("lab");
+	}
+
+	public Lab getLab() {
+		return lab;
+	}
+
+	public void setLab(Lab lab) {
+		this.lab = lab;
+	}
+	
+	@Test
+	public void install() {
+		try {
+			lab.jethroServer.cli.runCommand("ls -la /");
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+//		mkdir /mnt/jethro_local_cache
+//		# make a file system on the local SSD and auto-mount it (not shown)
+//		chmod 700 /mnt/jethro_local_cache
+	}
+
+}

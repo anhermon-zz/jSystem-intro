@@ -1,0 +1,8 @@
+package com.jethrodata.auto;
+
+import com.jethrodata.auto.cli.AbstractStation;
+
+public class JethroServer {
+
+	public AbstractStation station; 
+}

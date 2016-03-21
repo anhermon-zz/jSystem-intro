@@ -22,11 +22,23 @@ public class LinuxStation extends AbstractStation {
 	public void listDir(String folderName) throws Exception {
 		CliCommand command = new CliCommand("ls -la " + folderName);
 		cliConnection.handleCliCommand("Listing folder " + folderName, command);
+		//cliConnection.getTestAgainstObject();
 	}
 
 	@Override
 	public void runCommand(String commandStr) throws Exception {
-
+		CliCommand command = new CliCommand(commandStr);
+		cliConnection.handleCliCommand("Executing command:" + commandStr, command);
+	}
+	@Override
+	public String runCommandWithResult(String commandStr) throws Exception {
+		String consoleStrBefore = cliConnection.getTestAgainstObject().toString();
+		CliCommand command = new CliCommand(commandStr);
+		return null;
+//		return cliConnection.getTestAgainstObject().toString();
+//		for(String str : cliConnection.getTestAgainstObject().toString().split(cliConnection.getUser() + "@.*\\$")) {
+//			report.report("*****" + str);
+//		};
 	}
 
 	@Override
@@ -52,4 +64,15 @@ public class LinuxStation extends AbstractStation {
 
 	}
 
+	@Override
+	public float getCPUUsage() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getRAMUsage() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

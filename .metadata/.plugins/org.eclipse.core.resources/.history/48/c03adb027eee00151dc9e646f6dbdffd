@@ -1,0 +1,13 @@
+package com.jethrodata.auto.logs;
+
+import java.io.File;
+
+public class FileLogCollector extends AbstractLogCollector {
+
+	@Override
+	public String collect(File source, long startTS, long endTS) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

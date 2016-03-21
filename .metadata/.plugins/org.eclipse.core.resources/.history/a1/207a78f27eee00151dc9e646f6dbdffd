@@ -1,0 +1,17 @@
+package com.jethrodata.auto.util;
+
+import jsystem.framework.system.SystemObjectImpl;
+
+public class CommonsContainer extends SystemObjectImpl {
+	
+	private static String eol = "\n";
+
+	public static String getEol() {
+		return eol;
+	}
+
+	public static void setEol(String eol) {
+		this.eol = eol;
+	}
+
+}

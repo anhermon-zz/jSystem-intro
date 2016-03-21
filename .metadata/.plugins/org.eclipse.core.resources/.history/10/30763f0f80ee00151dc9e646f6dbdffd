@@ -1,0 +1,44 @@
+package com.jethrodata.auto.logs;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.regex.Matcher;
+
+import com.jethrodata.auto.util.CommonsContainer;
+
+public class FileLogCollector extends AbstractLogCollector {
+
+	@Override
+	public String collect(File source, long startTS, long endTS) {
+		StringBuilder input = new StringBuilder();
+		StringBuilder output = new StringBuilder();
+		if (source.isDirectory()) {
+			for(File file : source.listFiles()) {
+				if(input.length() != 0) {
+					input.append(CommonsContainer.eol);
+				}
+				input.append(collect(file, startTS, endTS));
+			}
+		} else {
+			try(FileReader fileReader = new FileReader(source)) {
+				try(BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+					String line;
+					while ((line = bufferedReader.readLine()) != null) {
+						if(input.length() != 0) {
+							input.append(CommonsContainer.eol);
+						}
+						input.append(line);
+					}
+				}
+			} catch(Exception e) { 
+				throw new RuntimeException(e);
+			}
+			Matcher matcher = this.getDateRegex().matcher(input.toString());
+			while (matcher.find()) {
+			    System.out.println(m.group(1));
+			}
+		}
+	}
+
+}

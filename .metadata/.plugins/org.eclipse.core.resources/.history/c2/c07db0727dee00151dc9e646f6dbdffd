@@ -1,0 +1,9 @@
+package com.jethrodata.auto.logs;
+
+import java.io.File;
+
+public interface AbstractLogCollector {
+
+	public String collect(File source, long startTS, long endTS);
+
+}

@@ -1,0 +1,69 @@
+package com.jethrodata.auto.logs;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.regex.Matcher;
+
+import com.jethrodata.auto.util.CommonsContainer;
+
+/**
+ * Collects relevant section of log files
+ * @author Angel Hermon
+ */
+public class FileLogCollector extends AbstractLogCollector {
+	
+	@Override
+	public String collect(File source, long startTS, long endTS) {
+		StringBuilder input = new StringBuilder();
+		StringBuilder output = new StringBuilder();
+		if (source.isDirectory()) {
+			throw new RuntimeException("we do not support folders");
+//			for(File file : source.listFiles()) {
+//				if(input.length() != 0) {
+//					input.append(CommonsContainer.eol);
+//				}
+//				input.append(collect(file, startTS, endTS));
+//			}
+		} else {
+			try(FileReader fileReader = new FileReader(source)) {
+				try(BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+					String line;
+					while ((line = bufferedReader.readLine()) != null) {
+						if(input.length() != 0) {
+							input.append(CommonsContainer.eol);
+						}
+						input.append(line);
+					}
+				}
+			} catch(Exception e) { 
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			Matcher matcher = this.getDateRegex().matcher(input.toString());
+			while (matcher.find()) {
+				String timestampStr = matcher.group(1);
+			    String log   = matcher.group(2);
+			    long parsedTimestamp;
+			    try {
+					parsedTimestamp = this.getDateFormat().parse(timestampStr).getTime();
+				} catch (Exception e) {
+					e.printStackTrace();
+					throw new RuntimeException(e);
+				}
+			    if (parsedTimestamp < startTS) { 
+			    	continue;
+			    } else if (parsedTimestamp > endTS) { 
+			    	break;
+			    } else {
+			    	if(output.length() != 0) {
+			    		output.append(CommonsContainer.eol);
+					}
+			    	output.append(log);
+			    }		    
+			}
+			
+		}
+		return output.toString();
+	}
+}

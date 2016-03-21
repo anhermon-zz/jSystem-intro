@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="LinuxStationOperations" project="jethrodata-tests" tests="2" started="2" failures="0" errors="2" ignored="0">
+  <testsuite name="com.jethrodata.auto.LinuxStationOperations" time="0.226">
+    <testcase name="listDir" classname="com.jethrodata.auto.LinuxStationOperations" time="0.152">
+      <error>java.lang.NullPointerException&#13;
+	at com.jethrodata.auto.LinuxStationOperations.listDir(LinuxStationOperations.java:35)&#13;
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#13;
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)&#13;
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)&#13;
+	at java.lang.reflect.Method.invoke(Unknown Source)&#13;
+	at org.junit.internal.runners.TestMethod.invoke(TestMethod.java:66)&#13;
+	at org.junit.internal.runners.MethodRoadie.runTestMethod(MethodRoadie.java:105)&#13;
+	at org.junit.internal.runners.MethodRoadie$2.run(MethodRoadie.java:86)&#13;
+	at org.junit.internal.runners.MethodRoadie.runBeforesThenTestThenAfters(MethodRoadie.java:94)&#13;
+	at org.junit.internal.runners.MethodRoadie.runTest(MethodRoadie.java:84)&#13;
+	at org.junit.internal.runners.MethodRoadie.run(MethodRoadie.java:49)&#13;
+	at org.junit.internal.runners.JUnit4ClassRunner.invokeTestMethod(JUnit4ClassRunner.java:98)&#13;
+	at org.junit.internal.runners.JUnit4ClassRunner.runMethods(JUnit4ClassRunner.java:61)&#13;
+	at org.junit.internal.runners.JUnit4ClassRunner$1.run(JUnit4ClassRunner.java:54)&#13;
+	at org.junit.internal.runners.ClassRoadie.runUnprotected(ClassRoadie.java:34)&#13;
+	at org.junit.internal.runners.ClassRoadie.runProtected(ClassRoadie.java:44)&#13;
+	at org.junit.internal.runners.JUnit4ClassRunner.run(JUnit4ClassRunner.java:52)&#13;
+	at junit.framework.JSystemJUnit4ClassRunner.run(JSystemJUnit4ClassRunner.java:250)&#13;
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)&#13;
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)&#13;
+&#13;
+</error>
+    </testcase>
+    <testcase name="assertFileSize" classname="com.jethrodata.auto.LinuxStationOperations" time="0.013">
+      <error>java.lang.NullPointerException&#13;
+	at com.jethrodata.auto.LinuxStationOperations.assertFileSize(LinuxStationOperations.java:41)&#13;
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#13;
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)&#13;
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)&#13;
+	at java.lang.reflect.Method.invoke(Unknown Source)&#13;
+	at org.junit.internal.runners.TestMethod.invoke(TestMethod.java:66)&#13;
+	at org.junit.internal.runners.MethodRoadie.runTestMethod(MethodRoadie.java:105)&#13;
+	at org.junit.internal.runners.MethodRoadie$2.run(MethodRoadie.java:86)&#13;
+	at org.junit.internal.runners.MethodRoadie.runBeforesThenTestThenAfters(MethodRoadie.java:94)&#13;
+	at org.junit.internal.runners.MethodRoadie.runTest(MethodRoadie.java:84)&#13;
+	at org.junit.internal.runners.MethodRoadie.run(MethodRoadie.java:49)&#13;
+	at org.junit.internal.runners.JUnit4ClassRunner.invokeTestMethod(JUnit4ClassRunner.java:98)&#13;
+	at org.junit.internal.runners.JUnit4ClassRunner.runMethods(JUnit4ClassRunner.java:61)&#13;
+	at org.junit.internal.runners.JUnit4ClassRunner$1.run(JUnit4ClassRunner.java:54)&#13;
+	at org.junit.internal.runners.ClassRoadie.runUnprotected(ClassRoadie.java:34)&#13;
+	at org.junit.internal.runners.ClassRoadie.runProtected(ClassRoadie.java:44)&#13;
+	at org.junit.internal.runners.JUnit4ClassRunner.run(JUnit4ClassRunner.java:52)&#13;
+	at junit.framework.JSystemJUnit4ClassRunner.run(JSystemJUnit4ClassRunner.java:250)&#13;
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)&#13;
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)&#13;
+&#13;
+</error>
+    </testcase>
+  </testsuite>
+</testrun>

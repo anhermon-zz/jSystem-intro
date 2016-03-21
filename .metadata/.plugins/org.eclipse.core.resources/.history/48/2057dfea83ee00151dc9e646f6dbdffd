@@ -1,0 +1,33 @@
+package com.jethrodata.auto.logs;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.regex.Pattern;
+
+import jsystem.framework.system.SystemObjectImpl;
+
+public abstract class AbstractLogCollector extends SystemObjectImpl {
+	
+	private SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
+	
+	private String dateRegex;
+
+	public abstract String collect(File source, long startTS, long endTS);
+
+	public SimpleDateFormat getDateFormat() {
+		return dateFormat;
+	}
+
+	public void setDateFormat(SimpleDateFormat dateFormat) {
+		this.dateFormat = dateFormat;
+	}
+
+	public Pattern getDateRegex() {
+		return Pattern.compile(this.dateRegex);
+	}
+
+	public void setDateRegex(String dateRegex) {
+		this.dateRegex = dateRegex;
+	}
+
+}

@@ -1,0 +1,11 @@
+package com.jethrodata.auto;
+
+import jsystem.framework.system.SystemObjectImpl;
+
+public abstract class AbstractProber extends SystemObjectImpl {
+	
+	public float getCPUUsage() {
+		
+	}
+
+}

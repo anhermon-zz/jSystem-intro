@@ -1,0 +1,7 @@
+package com.jethrodata.auto;
+
+import junit.framework.SystemTestCase4;
+
+public class JethroSetup extends SystemTestCase4 {
+
+}

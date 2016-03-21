@@ -1,0 +1,5 @@
+package com.jethrodata.auto.util;
+
+public class UtilityContainer {
+
+}

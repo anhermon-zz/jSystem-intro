@@ -18,10 +18,10 @@
     </target>
     <target name="t0">
         <jsystem showoutput="true">
-            <sysproperty key="jsystem.uuid" value="7124133d-fd37-41ec-b1e0-55d2949d22f0"/>
+            <sysproperty key="jsystem.uuid" value="b435396b-8940-4b16-b125-f7fe6d934cd9"/>
             <sysproperty key="jsystem.parent.uuid" value="${jsystem.parent.uuid}.${jsystem.uuid}"/>
             <sysproperty key="jsystem.parent.name" value="${jsystem.parent.name}.${ant.project.name}"/>
-            <test name="com.jethrodata.auto.DatabaseOperations.queryWithHandler"/>
+            <test name="com.jethrodata.auto.JethroSetup.install"/>
         </jsystem>
     </target>
 </project>

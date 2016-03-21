@@ -21,7 +21,7 @@ public class LogOperations extends SystemTestCase4 {
 	@Test
 	@TestProperties(name = "Collect logs from ${source}", paramsInclude = { "source" })
 	public void testLogCollection() {
-		logCollector.collect(source, 0, 999999999);
+		System.out.println(logCollector.collect(source, 0));
 	}
 
 	public File getSource() {

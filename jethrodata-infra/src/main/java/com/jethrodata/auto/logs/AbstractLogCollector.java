@@ -1,0 +1,43 @@
+package com.jethrodata.auto.logs;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Pattern;
+
+import jsystem.framework.system.SystemObjectImpl;
+
+public abstract class AbstractLogCollector extends SystemObjectImpl {
+	
+	private static final Map<String, Long> marks = new HashMap<>();
+	
+	/**
+	 * Log file date format
+	 */
+	private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	
+	/**
+	 * log file date regex
+	 */
+	private String dateRegex = "(\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}] )(.*)";
+
+	public abstract String collect(File source, long startTS);
+
+	public SimpleDateFormat getDateFormat() {
+		return dateFormat;
+	}
+
+	public void setDateFormat(SimpleDateFormat dateFormat) {
+		this.dateFormat = dateFormat;
+	}
+
+	public Pattern getDateRegex() {
+		return Pattern.compile(this.dateRegex);
+	}
+
+	public void setDateRegex(String dateRegex) {
+		this.dateRegex = dateRegex;
+	}
+
+}

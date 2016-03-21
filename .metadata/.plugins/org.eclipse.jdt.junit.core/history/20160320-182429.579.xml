@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="LinuxStationOperations" project="jethrodata-tests" tests="2" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.jethrodata.auto.LinuxStationOperations" incomplete="true">
+    <testcase name="listDir" classname="com.jethrodata.auto.LinuxStationOperations" incomplete="true"/>
+    <testcase name="assertFileSize" classname="com.jethrodata.auto.LinuxStationOperations" incomplete="true"/>
+  </testsuite>
+</testrun>

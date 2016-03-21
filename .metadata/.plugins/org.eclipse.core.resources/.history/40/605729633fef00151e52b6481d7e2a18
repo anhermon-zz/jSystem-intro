@@ -1,0 +1,5 @@
+package com.jethrodata.auto;
+
+public class AbstractJethroOperations {
+
+}

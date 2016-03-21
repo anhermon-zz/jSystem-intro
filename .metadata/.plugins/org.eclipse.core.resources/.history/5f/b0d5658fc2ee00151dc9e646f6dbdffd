@@ -1,0 +1,15 @@
+package com.jethrodata.auto;
+
+import com.jethrodata.auto.cli.AbstractStation;
+import com.jethrodata.auto.logs.AbstractLogCollector;
+
+import jsystem.framework.scenario.SystemObjectOperation;
+
+public class JethroServer extends SystemObjectOperation {
+
+	public AbstractStation cli;
+	
+	public AbstractLogCollector logCollector;
+	
+	public AbstractProber prober;
+}

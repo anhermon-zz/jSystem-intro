@@ -1,0 +1,18 @@
+package com.jethrodata.auto;
+
+import org.junit.Before;
+
+import junit.framework.SystemTestCase4;
+
+public class JethroSetup extends SystemTestCase4 {
+	
+	private Lab lab;
+	
+	private String machineName;
+
+	@Before
+	public void setup() throws Exception {
+		lab = (Lab) system.getSystemObject("lab");
+	}
+
+}

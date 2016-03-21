@@ -1,0 +1,29 @@
+package com.jethrodata.auto;
+
+import com.jethrodata.auto.cli.AbstractStation;
+
+import jsystem.framework.scenario.SystemObjectOperation;
+import jsystem.framework.system.SystemObjectImpl;
+
+public abstract class AbstractProber extends SystemObjectImpl {
+	
+	private AbstractStation getCLI() {
+		AbstractStation cli;
+		try {
+			AbstractStation cli = ((Lab) system.getSystemObject("lab")).jethroServer.cli;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		return cli;
+		
+	}
+	public float getCPUUsage() {
+		
+	}
+	
+	public float getRAMUsage() {
+		
+	}
+
+}

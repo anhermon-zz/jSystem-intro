@@ -1,0 +1,24 @@
+package com.jethrodata.auto.logs;
+
+import java.io.File;
+
+import com.jethrodata.auto.util.CommonsContainer;
+
+public class FileLogCollector extends AbstractLogCollector {
+
+	@Override
+	public String collect(File source, long startTS, long endTS) {
+		StringBuilder sb = new StringBuilder();
+		if (source.isDirectory()) {
+			for(File file : source.listFiles()) {
+				if(sb.length() != 0) {
+					sb.append(CommonsContainer.eol)
+				}
+				collect(file, startTS, endTS);
+			}
+		} else {
+			
+		}
+	}
+
+}

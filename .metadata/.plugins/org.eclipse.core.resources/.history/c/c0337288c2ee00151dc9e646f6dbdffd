@@ -1,0 +1,14 @@
+package com.jethrodata.auto;
+
+import com.jethrodata.auto.data.JsystemDataSource;
+
+import jsystem.framework.system.SystemObjectImpl;
+
+public class Lab extends SystemObjectImpl {
+	
+	public JsystemDataSource dataSource;
+	//TODO:figure out how to specify map in SUT
+	//public Map<String, JethroServer> jethroServers;
+	public JethroServer jethroServer;
+	
+}
