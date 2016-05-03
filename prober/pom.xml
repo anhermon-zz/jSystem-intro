@@ -15,6 +15,20 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.jethrodata</groupId>
+			<artifactId>JethroDataJDBC</artifactId>
+			<version>2.4.1</version>
+		</dependency>
+		
+			<dependency>
+			<groupId>com.jethrodata</groupId>
+			<artifactId>protobuf</artifactId>
+			<version>2.4.1</version>
+		</dependency>
+		
+		
 	</dependencies>
 
 

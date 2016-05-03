@@ -1,4 +1,4 @@
-package com.jethrodata.rest;
+package com.jethrodata.rest.controllers;
 
 import java.util.Map;
 
@@ -6,6 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.jethrodata.rest.Collector;
+import com.jethrodata.rest.Utils;
 
 
 @RestController
@@ -78,5 +81,11 @@ public class Controllers {
 	@RequestMapping(value="mem/current")
 	public ResponseEntity<Map> getCurrentMem() {
 		return ResponseEntity.ok(collector.sampleMem());
-	}	
+	}
+	
+//	@RequestMapping(value="query", method= {RequestMethod.POST})
+//	public ResponseEntity<String> executeQuery() {
+//		
+//	}
+	
 }
